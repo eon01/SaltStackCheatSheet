@@ -44,14 +44,14 @@ salt '*' sys.doc  auth django
 salt '*' sys.doc sdb sqlite3
 ```
 
-# SaltStack Modules And Functions:
+## SaltStack Modules And Functions:
 
 ```
 salt '*' sys.list_modules
 salt '*' sys.list_functions
 ```
 
-# Compound matchers:
+## Compound matchers:
 
 | Letter | Match Type | Example | Alt Delimiter?] |
 | --- | --- | --- | --- |
@@ -76,3 +76,51 @@ salt -C '( ms-1 or G@id:ms-3 ) and G@id:ms-3' test.ping
 # Excluding
 salt -C 'not web-dc1-srv' test.ping
 ```
+
+## Upgrades
+
+```
+#
+# Listing upgrades
+salt '*' pkg.list_upgrades
+
+# Upgrading
+salt '*' pkg.upgrade
+```
+
+## Reboot And Uptime
+
+```
+# Reboot
+salt '*' system.reboot
+
+#Uptime
+salt '*' status.uptime
+```
+
+## Grains
+
+```
+# Syncing grains
+salt '*' saltutil.sync_grains
+
+# Available grains can be listed by using the ‘grains.ls’ module:
+salt '*' grains.ls
+
+# Grains data can be listed by using the ‘grains.items’ module:
+salt '*' grains.items
+
+# Grains have values that could be called via ‘grains.get <grain_name>’ (path is the name of a grain)
+salt '*' grains.get path
+```
+
+## Syncing Data
+
+```
+# Syncing grains
+salt '*' saltutil.sync_grains
+
+# Syncing everything from grains to modules, outputters, renderers, returners, states and utils.
+salt '*' saltutil.sync_all
+```
+
