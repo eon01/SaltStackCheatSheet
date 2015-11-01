@@ -20,6 +20,16 @@ apt-get install salt-ssh
 apt-get install salt-syndic
 ```
 
+## Debugging
+
+```
+# Debugging the master
+salt-master -l debug
+
+# Debugging the minion
+salt-minion -l debug
+```
+
 ## SaltStack Documentation
 
 ```
@@ -124,3 +134,61 @@ salt '*' saltutil.sync_grains
 salt '*' saltutil.sync_all
 ```
 
+## Running System Commands
+
+```
+salt "*" cmd.run "ls -lrth /data"
+salt "*" cmd.run "df -kh /data"
+salt "*" cmd.run "du -sh /data"
+```
+
+## State Declaration Structure
+
+```
+# Source: https://docs.saltstack.com/en/latest/ref/states/highstate.html#state-declaration
+
+# standard declaration
+<ID Declaration>:
+  <State Module>:
+    - <Function>
+    - <Function Arg>
+    - <Function Arg>
+    - <Function Arg>
+    - <Name>: <name>
+    - <Requisite Declaration>:
+      - <Requisite Reference>
+      - <Requisite Reference>
+
+
+# inline function and names
+<ID Declaration>:
+  <State Module>.<Function>:
+    - <Function Arg>
+    - <Function Arg>
+    - <Function Arg>
+    - <Names>:
+      - <name>
+      - <name>
+      - <name>
+    - <Requisite Declaration>:
+      - <Requisite Reference>
+      - <Requisite Reference>
+
+
+# multiple states for single id
+<ID Declaration>:
+  <State Module>:
+    - <Function>
+    - <Function Arg>
+    - <Name>: <name>
+    - <Requisite Declaration>:
+      - <Requisite Reference>
+  <State Module>:
+    - <Function>
+    - <Function Arg>
+    - <Names>:
+      - <name>
+      - <name>
+    - <Requisite Declaration>:
+      - <Requisite Reference>
+```
