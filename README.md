@@ -26,6 +26,22 @@ apt-get install salt-syndic
 curl -L https://bootstrap.saltstack.com -o install_salt.sh && sudo sh install_salt.sh
 ```
 
+## Salt Key Management
+
+``` 
+# Listing Salt requests
+salt-key -L
+
+# Accepting all requests
+salt-key -A
+
+# Accepting a single request (from myNode)
+salt-key -a myNode
+
+# Removing the key of a Salt 'myNode' Minion
+salt-key -d minion_id
+```
+
 ## Debugging
 
 ```
@@ -60,14 +76,14 @@ salt '*' sys.doc  auth django
 salt '*' sys.doc sdb sqlite3
 ```
 
-## SaltStack Modules And Functions:
+## SaltStack Modules And Functions
 
 ```
 salt '*' sys.list_modules
 salt '*' sys.list_functions
 ```
 
-## Compound matchers:
+## Compound Matchers
 
 | Letter | Match Type | Example | Alt Delimiter?] |
 | --- | --- | --- | --- |
@@ -113,7 +129,7 @@ salt '*' pkgutil.refresh_db
 salt '*' pkgutil.version mongodb
 ```
 
-## Packages manipulation
+## Packages Manipulation
 
 ```
 # Installation
@@ -131,7 +147,7 @@ salt '*' pkg.purge apache2 mysql-server
 
 ```
 
-## Reboot And Uptime
+## Reboot & Uptime
 
 ```
 # Reboot
@@ -141,7 +157,7 @@ salt '*' system.reboot
 salt '*' status.uptime
 ```
 
-## Grains
+## Using Grains
 
 ```
 # Syncing grains
@@ -190,7 +206,7 @@ salt '*' service.restart apache2
 salt '*' service.stop apache2
 ```
 
-## Working with network commands
+## Network Management
 
 ```
 # Get IP of your minion
@@ -246,7 +262,7 @@ salt-run jobs.list_jobs
 salt-run jobs.lookup_jid 20151101225221651308
 ```
 
-## Show SLS
+## Working With SLS
 
 ```
 salt '*' state.show_sls
