@@ -53,17 +53,42 @@ salt '*' sys.list_functions
 
 # Compound matchers:
 
-<colgroup><col width="5%"> <col width="15%"> <col width="47%"> <col width="34%"></colgroup> 
-| Letter | Match Type | Example | [<span>Alt Delimiter?</span>](#target-alt-delimiters) |
-| --- | --- | --- | --- |
-| G | Grains glob | `<span class="pre">G@os:Ubuntu</span>` | Yes |
-| E | PCRE Minion ID | `<span class="pre">E@web\d+\.(dev|qa|prod)\.loc</span>` | No |
-| P | Grains PCRE | `<span class="pre">P@os:(RedHat|Fedora|CentOS)</span>` | Yes |
-| L | List of minions | `<span class="pre">L@minion1.example.com,minion3.domain.com</span> <span class="pre">or</span> <span class="pre">bl*.domain.com</span>` | No |
-| I | Pillar glob | `<span class="pre">I@pdata:foobar</span>` | Yes |
-| J | Pillar PCRE | `<span class="pre">J@pdata:^(foo|bar)$</span>` | Yes |
-| S | Subnet/IP address | `<span class="pre">S@192.168.1.0/24</span>` or `<span class="pre">S@192.168.1.100</span>` | No |
-| R | Range cluster | `<span class="pre">R@%foo.bar</span>` | No |
+ ----------------------------------------------------------------------------------------------------------
+  Letter                               Match Type Example                           [<span>Alt
+                                                                                    Delimiter?</span>]
+  ------------------------------------ ---------- --------------------------------- ------------------------
+  G                                    Grains     `G@os:Ubuntu`{.docutils .literal} Yes
+                                       glob                                         
+
+  E                                    PCRE       `E@web\d+\.(dev|qa|prod)\.loc`{.d No
+                                       Minion ID  ocutils                           
+                                                  .literal}                         
+
+  P                                    Grains     `P@os:(RedHat|Fedora|CentOS)`{.do Yes
+                                       PCRE       cutils                            
+                                                  .literal}                         
+
+  L                                    List of    `L@minion1.example.com,minion3.do No
+                                       minions    main.com or bl*.domain.com`{.docu 
+                                                  tils                              
+                                                  .literal}                         
+
+  I                                    Pillar     `I@pdata:foobar`{.docutils        Yes
+                                       glob       .literal}                         
+
+  J                                    Pillar     `J@pdata:^(foo|bar)$`{.docutils   Yes
+                                       PCRE       .literal}                         
+
+  S                                    Subnet/IP  `S@192.168.1.0/24`{.docutils      No
+                                       address    .literal} or                      
+                                                  `S@192.168.1.100`{.docutils       
+                                                  .literal}                         
+
+  R                                    Range      `R@%foo.bar`{.docutils .literal}  No
+                                       cluster                                      
+  ----------------------------------------------------------------------------------------------------------
+
+  [<span>Alt Delimiter?</span>]: #target-alt-delimiters
 
 Other examples: 
 
