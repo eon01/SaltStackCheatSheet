@@ -19,6 +19,11 @@ apt-get install salt-ssh
 # Salt syndic installation
 apt-get install salt-syndic
 ```
+## Bootstraping Salt Minion
+
+```
+curl -L https://bootstrap.saltstack.com -o install_salt.sh && sudo sh install_salt.sh
+```
 
 ## Debugging
 
@@ -142,12 +147,74 @@ salt "*" cmd.run "df -kh /data"
 salt "*" cmd.run "du -sh /data"
 ```
 
+## Working With Services
+
+```
+# Apache example
+
+# Checking if service is available
+salt '*' service.available apache2
+
+# Manipulating Apache2 service
+salt '*' service.status apache2
+salt '*' service.start apache2
+salt '*' service.restart apache2
+salt '*' service.stop apache2
+```
+
+## Working with network commands
+
+```
+
+
+# Get IP of your minion
+salt '*' network.ip_addrs          
+
+# Ping a host from your minion
+salt '*' network.ping localhost   
+
+# Traceroute a host from your minion
+salt '*' network.traceroute localhost   
+
+# Get hostname
+salt '*' network.get_hostname      
+
+# Modify hostname to 'myNode'
+salt '*' network.mod_hostname myNode 
+
+# Information on all of the running TCP connections
+salt '*' network.active_tcp
+
+# Return the arp table from the minion
+salt '*' network.arp
+
+# Test connectivity
+salt '*' network.connect google-public-dns-a.google.com port=53 proto=udp timeout=3
+
+# Get default route
+salt '*' network.default_route
+
+# Execute dig
+salt '*' network.dig eon01.com
+
+# Get the MAC addres of eth0 interface
+salt '*' network.hw_addr eth0
+
+# Get the inet addres of eth1 interface
+salt '*' network.interface eth1
+
+# Get the IP addres of tun interface 
+salt '*' network.interface_ip tun
+```
+
+
+
 ## State Declaration Structure
 
 ```
 # Source: https://docs.saltstack.com/en/latest/ref/states/highstate.html#state-declaration
 
-# standard declaration
+# Standard declaration
 <ID Declaration>:
   <State Module>:
     - <Function>
@@ -160,7 +227,7 @@ salt "*" cmd.run "du -sh /data"
       - <Requisite Reference>
 
 
-# inline function and names
+# Inline function and names
 <ID Declaration>:
   <State Module>.<Function>:
     - <Function Arg>
@@ -175,7 +242,7 @@ salt "*" cmd.run "du -sh /data"
       - <Requisite Reference>
 
 
-# multiple states for single id
+# Multiple states for single id
 <ID Declaration>:
   <State Module>:
     - <Function>
@@ -192,3 +259,16 @@ salt "*" cmd.run "du -sh /data"
     - <Requisite Declaration>:
       - <Requisite Reference>
 ```
+
+## SaltStack Github Repositories
+
+- Django with SaltStack https://github.com/wunki/django-salted
+- Salt GUI pad https://github.com/tinyclues/saltpad
+- Openstack automation with SaltStack https://github.com/CSSCorp/openstack-automation
+- A curated collection of working salt states and configurations for use in your saltstack setup. https://github.com/saltops/saltmine
+- These are all of the configuration files needed to built a wordpress development environment with Vagrant, Virtual Box and Salt-Stack https://github.com/paulehr/saltstack-wordpress
+- Java bindings for the SaltStack API https://github.com/SUSE/saltstack-netapi-client-java
+- Vim snippets for saltstack states files https://github.com/StephenPCG/vim-snippets-salt
+- Metrics for saltstack https://github.com/pengyao/salt-metrics
+- Salt GUI https://github.com/saltstack/halite
+- 
