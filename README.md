@@ -19,6 +19,7 @@ apt-get install salt-ssh
 # Salt syndic installation
 apt-get install salt-syndic
 ```
+
 ## Bootstraping Salt Minion
 
 ```
@@ -92,7 +93,7 @@ salt -C '( ms-1 or G@id:ms-3 ) and G@id:ms-3' test.ping
 salt -C 'not web-dc1-srv' test.ping
 ```
 
-## Upgrades
+## Upgrades & Versions
 
 ```
 #
@@ -101,6 +102,33 @@ salt '*' pkg.list_upgrades
 
 # Upgrading
 salt '*' pkg.upgrade
+
+# List the packages currently installed as a dict
+salt '*' pkg.list_pkgs versions_as_list=True
+
+# Refresh the pkgutil repo database
+salt '*' pkgutil.refresh_db
+
+# Check the version of a package
+salt '*' pkgutil.version mongodb
+```
+
+## Packages manipulation
+
+```
+# Installation
+salt '*' pkg.install apache2
+
+# Latest version installation
+salt '*' pkgutil.latest_version mysql-common
+
+# Removing package(s)
+salt '*' pkg.remove vim
+
+# Purging package(s)
+salt '*' pkg.purge apache2 mysql-server
+
+
 ```
 
 ## Reboot And Uptime
@@ -165,8 +193,6 @@ salt '*' service.stop apache2
 ## Working with network commands
 
 ```
-
-
 # Get IP of your minion
 salt '*' network.ip_addrs          
 
@@ -207,6 +233,32 @@ salt '*' network.interface eth1
 salt '*' network.interface_ip tun
 ```
 
+## Job Management
+
+```
+# List active jobs
+salt-run jobs.active
+
+# List all jobs with the id and other information
+salt-run jobs.list_jobs
+
+# List multiple information about the job with the id:20151101225221651308 like the result output
+salt-run jobs.lookup_jid 20151101225221651308
+```
+
+## Show SLS
+
+```
+salt '*' state.show_sls
+```
+
+## Testing States
+
+```
+salt '*' state.highstate test=True
+salt '*' state.sls test=True
+salt '*' state.single test=True
+```
 
 
 ## State Declaration Structure
@@ -271,4 +323,3 @@ salt '*' network.interface_ip tun
 - Vim snippets for saltstack states files https://github.com/StephenPCG/vim-snippets-salt
 - Metrics for saltstack https://github.com/pengyao/salt-metrics
 - Salt GUI https://github.com/saltstack/halite
-- 
