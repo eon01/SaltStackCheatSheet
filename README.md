@@ -18,6 +18,9 @@ apt-get install salt-ssh
 
 # Salt syndic installation
 apt-get install salt-syndic
+
+# Salt API installation
+apt-get install salt-api
 ```
 
 ## Bootstraping Salt Minion
@@ -50,7 +53,13 @@ salt-master -l debug
 
 # Debugging the minion
 salt-minion -l debug
+
+# Restarting the minion without cache
+stop master/minion
+rm -rf /var/cache/salt
+start master/minion
 ```
+
 
 ## SaltStack Documentation
 
@@ -249,6 +258,24 @@ salt '*' network.interface eth1
 salt '*' network.interface_ip tun
 ```
 
+## Working With HTTP Requests
+
+```
+# Get the html source code of a page
+salt-run http.query http://eon01.com text=true
+
+# Get the header of a page
+salt-run http.query http://eon01.com headers=true
+
+# Get the response code from a web server
+salt-run http.query http://eon01.com status=true
+
+# Sending a post request
+salt '*' http.query http://domain.com/ method=POST params='key1=val1&key2=val2'
+
+#
+```
+
 ## Job Management
 
 ```
@@ -260,6 +287,9 @@ salt-run jobs.list_jobs
 
 # List multiple information about the job with the id:20151101225221651308 like the result output
 salt-run jobs.lookup_jid 20151101225221651308
+
+# Kill the job with the id:20151101225221651308
+salt 'server' saltutil.kill_job 20151101225221651308
 ```
 
 ## Working With SLS
@@ -276,6 +306,12 @@ salt '*' state.sls test=True
 salt '*' state.single test=True
 ```
 
+## Load testing
+
+```
+# Starting 20 minions
+wget https://raw.githubusercontent.com/saltstack/salt/develop/tests/minionswarm.py; python minionswarm.py -m 20 --master salt-master;
+```
 
 ## State Declaration Structure
 
