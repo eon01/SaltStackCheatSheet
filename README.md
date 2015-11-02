@@ -1,6 +1,6 @@
 # SaltStackCheatSheet
 
-This is a part from "SaltStack For DevOps" : https://leanpub.com/saltstackfordevops/
+This code is a part from "SaltStack For DevOps" Book : https://leanpub.com/saltstackfordevops/
 
 ## Installing SaltStack - Ubuntu 14.*
 
@@ -377,3 +377,11 @@ wget https://raw.githubusercontent.com/saltstack/salt/develop/tests/minionswarm.
 - Vim snippets for saltstack states files https://github.com/StephenPCG/vim-snippets-salt
 - Metrics for saltstack https://github.com/pengyao/salt-metrics
 - Salt GUI https://github.com/saltstack/halite
+
+# Lisence and contribution
+This part is lisenced under CC BY-SA 4.0.
+Share — copy and redistribute the material in any medium or format
+Adapt — remix, transform, and build upon the material for any purpose, even commercially.
+The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+Feel free to contribute.
