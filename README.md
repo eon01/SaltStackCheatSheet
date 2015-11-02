@@ -1,5 +1,7 @@
 # SaltStackCheatSheet
 
+This is a part from "SaltStack For DevOps" : https://leanpub.com/saltstackfordevops/
+
 ## Installing SaltStack - Ubuntu 14.*
 
 ```
