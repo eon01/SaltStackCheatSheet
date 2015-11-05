@@ -2,6 +2,8 @@
 
 This code is a part from "SaltStack For DevOps" Book : https://leanpub.com/saltstackfordevops/
 
+![SaltStack For DevOps](https://s3.amazonaws.com/titlepages.leanpub.com/saltstackfordevops/large?1446505556)
+
 ## Installing SaltStack - Ubuntu 14.*
 
 ```
