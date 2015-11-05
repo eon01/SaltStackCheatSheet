@@ -294,6 +294,19 @@ salt-run jobs.lookup_jid 20151101225221651308
 salt 'server' saltutil.kill_job 20151101225221651308
 ```
 
+## Scheduling Feature
+
+```
+# Schedule a job called "scheduled_job"
+salt '*' schedule.add scheduled_job function='cmd.run' job_args="['']" seconds=10
+
+# Enable the job
+salt '*' schedule.enable_job scheduled_job
+
+# Disable the job
+salt '*' schedule.disable_job scheduled_job
+```
+
 ## Working With SLS
 
 ```
