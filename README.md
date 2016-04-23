@@ -29,16 +29,16 @@ apt-get install salt-syndic
 apt-get install salt-api
 ```
 
-## Bootstraping Salt Minion
+## Bootstrapping Salt Minion
 
 ```
 curl -L https://bootstrap.saltstack.com -o install_salt.sh && sudo sh install_salt.sh
 ```
 
-## Salt Key Management
+## Salt Key Management
 
 ``` 
-# Listing Salt requests
+# Listing Salt requests
 salt-key -L
 
 # Accepting all requests
@@ -47,7 +47,7 @@ salt-key -A
 # Accepting a single request (from myNode)
 salt-key -a myNode
 
-# Removing the key of a Salt 'myNode' Minion
+# Removing the key of a Salt 'myNode' Minion
 salt-key -d minion_id
 ```
 
@@ -385,14 +385,14 @@ wget https://raw.githubusercontent.com/saltstack/salt/develop/tests/minionswarm.
 
 ## SaltStack Github Repositories
 
-- Django with SaltStack https://github.com/wunki/django-salted
+- *Django* with SaltStack https://github.com/wunki/django-salted
 - Salt GUI pad https://github.com/tinyclues/saltpad
-- Openstack automation with SaltStack https://github.com/CSSCorp/openstack-automation
-- A curated collection of working salt states and configurations for use in your saltstack setup. https://github.com/saltops/saltmine
-- These are all of the configuration files needed to built a wordpress development environment with Vagrant, Virtual Box and Salt-Stack https://github.com/paulehr/saltstack-wordpress
-- Java bindings for the SaltStack API https://github.com/SUSE/saltstack-netapi-client-java
-- Vim snippets for saltstack states files https://github.com/StephenPCG/vim-snippets-salt
-- Metrics for saltstack https://github.com/pengyao/salt-metrics
+- *Openstack* automation with SaltStack https://github.com/CSSCorp/openstack-automation
+- A curated collection of working salt *states* and configurations for use in your saltstack setup. https://github.com/saltops/saltmine
+- These are all of the configuration files needed to built a *Wordpress* development environment with *Vagrant*, *Virtual Box* and SaltStack https://github.com/paulehr/saltstack-wordpress
+- *Java* bindings for the SaltStack API https://github.com/SUSE/saltstack-netapi-client-java
+- *Vim* snippets for SaltStack *states* files https://github.com/StephenPCG/vim-snippets-salt
+- Metrics for SaltStack https://github.com/pengyao/salt-metrics
 - Salt GUI https://github.com/saltstack/halite
 
 # Lisence and contribution
