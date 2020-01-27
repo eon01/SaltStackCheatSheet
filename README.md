@@ -492,23 +492,23 @@ wget https://raw.githubusercontent.com/saltstack/salt/develop/tests/minionswarm.
 
 ## Salted Github Repositories
 
-- Django with SaltStack https://github.com/wunki/django-salted
-- Salt GUI pad https://github.com/tinyclues/saltpad
-- Openstack automation with SaltStack https://github.com/CSSCorp/openstack-automation
-- A curated collection of working salt *states* and configurations for use in your saltstack setup. https://github.com/saltops/saltmine
-- These are all of the configuration files needed to built a Wordpress development environment with Vagrant, Virtual Box and SaltStack https://github.com/paulehr/saltstack-wordpress
-- Java bindings for the SaltStack API https://github.com/SUSE/saltstack-netapi-client-java
-- Vim snippets for SaltStack *states* files https://github.com/StephenPCG/vim-snippets-salt
-- Metrics for SaltStack https://github.com/pengyao/salt-metrics
-- Salt GUI https://github.com/saltstack/halite
-- cmdb saltstack https://github.com/voilet/cmdb
-- GUI For SaltStack https://github.com/yueyongyue/saltshaker
-- A collaborative curated list of awesome SaltStack resources, tutorials and other salted stuff. https://github.com/hbokh/awesome-saltstack
-- SaltStack provisioner for test-kitchen https://github.com/saltstack/kitchen-salt
-- Dashboard for saltstack https://github.com/halfss/salt-dashboard
-- Recipe to deploy production Kubernetes cluster https://github.com/valentin2105/Kubernetes-Saltstack
-- A gui and cli to manage saltstack deployments https://github.com/Lothiraldan/saltpad
-- Docker Compose setup to spin up a salt master and minions for easy testing, learning, and prototyping  https://github.com/cyface/docker-saltstack
+- [Django with SaltStack](https://github.com/wunki/django-salted) 
+- [Salt GUI pad](https://github.com/tinyclues/saltpad) 
+- [Openstack automation with SaltStack](https://github.com/CSSCorp/openstack-automation) 
+- [A curated collection of working salt *states* and configurations for use in your SaltStack setup.]( https://github.com/saltops/saltmine)
+- [These are all of the configuration files needed to built a Wordpress development environment with Vagrant, Virtual Box and SaltStack](https://github.com/paulehr/saltstack-wordpress) 
+- [Java bindings for the SaltStack API]( https://github.com/SUSE/saltstack-netapi-client-java)
+- [Vim snippets for SaltStack *states* files]( https://github.com/StephenPCG/vim-snippets-salt)
+- [Metrics for SaltStack](https://github.com/pengyao/salt-metrics) 
+- [Salt GUI](https://github.com/saltstack/halite) 
+- [cmdb saltstack](https://github.com/voilet/cmdb) 
+- [GUI For SaltStack](https://github.com/yueyongyue/saltshaker) 
+- [A collaborative curated list of awesome SaltStack resources, tutorials and other salted stuff.](https://github.com/hbokh/awesome-saltstack) 
+- [SaltStack provisioner for test-kitchen](https://github.com/saltstack/kitchen-salt) 
+- [Dashboard for saltstack](https://github.com/halfss/salt-dashboard) 
+- [Recipe to deploy production Kubernetes cluster](https://github.com/valentin2105/Kubernetes-Saltstack) 
+- [A gui and cli to manage saltstack deployments](https://github.com/Lothiraldan/saltpad) 
+- [Docker Compose setup to spin up a salt master and minions for easy testing, learning, and prototyping](https://github.com/cyface/docker-saltstack)  
 
 
 
