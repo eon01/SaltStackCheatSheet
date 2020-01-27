@@ -1,6 +1,12 @@
 # SaltStack Cheat Sheet
 
+
+
 This code is a part from "[SaltStack For DevOps](http://saltstackfordevops.com)".
+
+![](images/sfd.png)
+
+
 
 ## Installing SaltStack - Ubuntu 12, 14, 16 and 18
 
