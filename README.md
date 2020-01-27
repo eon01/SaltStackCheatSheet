@@ -2,7 +2,7 @@
 
 
 
-This code is a part from "[SaltStack For DevOps](http://saltstackfordevops.com)".
+This cheat sheet was first published in "[SaltStack For DevOps](http://saltstackfordevops.com)" course.
 
 ![](images/sfd.png)
 
