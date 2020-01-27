@@ -1,16 +1,18 @@
-# SaltStackCheatSheet
+# SaltStack Cheat Sheet
 
-This code is a part from "SaltStack For DevOps" Book : https://leanpub.com/saltstackfordevops/
+This code is a part from "[SaltStack For DevOps](http://saltstackfordevops.com)".
 
-Official website: http://saltstackfordevops.com
+## Installing SaltStack - Ubuntu 12, 14, 16 and 18
 
-[![SaltStack For DevOps](https://s3.amazonaws.com/titlepages.leanpub.com/saltstackfordevops/large?1446505556)](https://leanpub.com/saltstackfordevops/)
+Update your key base and sources lists from [this page](https://repo.saltstack.com/#ubuntu) according to your distribution.
 
-## Installing SaltStack - Ubuntu 14.*
+Example: Ubuntu 18 - Python3
 
 ```
-wget -O - https://repo.saltstack.com/apt/ubuntu/ubuntu14/latest/SALTSTACK-GPG-KEY.pub | sudo apt-key add -
-echo 'deb http://repo.saltstack.com/apt/ubuntu/ubuntu14/latest trusty main' | sudo tee -a /etc/apt/sources.list
+wget -O - https://repo.saltstack.com/py3/ubuntu/18.04/amd64/latest/SALTSTACK-GPG-KEY.pub | sudo apt-key add -
+
+echo 'http://repo.saltstack.com/py3/ubuntu/18.04/amd64/latest bionic main' | sudo tee -a /etc/apt/sources.list
+
 sudo apt-get update
 
 # Master installation
@@ -29,11 +31,25 @@ apt-get install salt-syndic
 apt-get install salt-api
 ```
 
-## Bootstrapping Salt Minion
+
+
+## Multi Platform Installation
+
+Salt Master:
 
 ```
-curl -L https://bootstrap.saltstack.com -o install_salt.sh && sudo sh install_salt.sh
+curl -L https://bootstrap.saltstack.com -o install_salt.sh
+sudo sh install_salt.sh -P -M
 ```
+
+Salt Minion:
+
+```
+curl -L https://bootstrap.saltstack.com -o install_salt.sh
+sudo sh install_salt.sh -P
+```
+
+
 
 ## Salt Key Management
 
@@ -49,7 +65,12 @@ salt-key -a myNode
 
 # Removing the key of a Salt 'myNode' Minion
 salt-key -d minion_id
+
+# Delete salt key and register it
+salt-key -d 'minion' && yes | salt-key -a 'minion'
 ```
+
+
 
 ## Debugging
 
@@ -65,6 +86,22 @@ stop master/minion
 rm -rf /var/cache/salt
 start master/minion
 ```
+
+
+
+## Clearing Cache
+
+```
+# Clearing cache on the minion by removing the cache directory
+salt '*' cmd.run 'rm -rf /var/cache/salt/minion/files/base/*'
+
+# Clearing cache the Salt way (using saltutil module)
+salt '*' saltutil.clear_cache
+
+# Synchronizes custom modules, states, beacons, grains, returners, output modules, renderers, and utils.
+salt '*' saltutil.sync_all
+```
+
 
 
 ## SaltStack Documentation
@@ -91,12 +128,40 @@ salt '*' sys.doc  auth django
 salt '*' sys.doc sdb sqlite3
 ```
 
+
+
+## SaltStack Versions
+
+```
+# Salt components report
+salt --versions-report
+salt --versions
+
+# Master version
+salt-master --version
+
+# Minion version
+salt-minion --version
+```
+
+
+
+
+
 ## SaltStack Modules And Functions
 
 ```
+# list modules
 salt '*' sys.list_modules
+
+# list functions
 salt '*' sys.list_functions
+
+# synchronising modules on the minion
+salt-call saltutil.sync_modules
 ```
+
+
 
 ## Compound Matchers
 
@@ -124,10 +189,11 @@ salt -C '( ms-1 or G@id:ms-3 ) and G@id:ms-3' test.ping
 salt -C 'not web-dc1-srv' test.ping
 ```
 
-## Upgrades & Versions
+
+
+## Upgrades & Versions of System Packages
 
 ```
-#
 # Listing upgrades
 salt '*' pkg.list_upgrades
 
@@ -143,6 +209,8 @@ salt '*' pkgutil.refresh_db
 # Check the version of a package
 salt '*' pkgutil.version mongodb
 ```
+
+
 
 ## Packages Manipulation
 
@@ -162,6 +230,8 @@ salt '*' pkg.purge apache2 mysql-server
 
 ```
 
+
+
 ## Reboot & Uptime
 
 ```
@@ -171,6 +241,8 @@ salt '*' system.reboot
 #Uptime
 salt '*' status.uptime
 ```
+
+
 
 ## Using Grains
 
@@ -188,6 +260,8 @@ salt '*' grains.items
 salt '*' grains.get path
 ```
 
+
+
 ## Syncing Data
 
 ```
@@ -198,6 +272,8 @@ salt '*' saltutil.sync_grains
 salt '*' saltutil.sync_all
 ```
 
+
+
 ## Running System Commands
 
 ```
@@ -205,6 +281,8 @@ salt "*" cmd.run "ls -lrth /data"
 salt "*" cmd.run "df -kh /data"
 salt "*" cmd.run "du -sh /data"
 ```
+
+
 
 ## Working With Services
 
@@ -220,6 +298,8 @@ salt '*' service.start apache2
 salt '*' service.restart apache2
 salt '*' service.stop apache2
 ```
+
+
 
 ## Network Management
 
@@ -264,23 +344,26 @@ salt '*' network.interface eth1
 salt '*' network.interface_ip tun
 ```
 
+
+
 ## Working With HTTP Requests
 
 ```
 # Get the html source code of a page
-salt-run http.query http://eon01.com text=true
+salt-run http.query https://faun.dev text=true
 
 # Get the header of a page
-salt-run http.query http://eon01.com headers=true
+salt-run http.query https://faun.dev headers=true
 
 # Get the response code from a web server
-salt-run http.query http://eon01.com status=true
+salt-run http.query https://faun.dev status=true
 
 # Sending a post request
 salt '*' http.query http://domain.com/ method=POST params='key1=val1&key2=val2'
 
-#
 ```
+
+
 
 ## Job Management
 
@@ -298,7 +381,9 @@ salt-run jobs.lookup_jid 20151101225221651308
 salt 'server' saltutil.kill_job 20151101225221651308
 ```
 
-## Scheduling Feature
+
+
+## Scheduling Features
 
 ```
 # Schedule a job called "scheduled_job"
@@ -309,21 +394,39 @@ salt '*' schedule.enable_job scheduled_job
 
 # Disable the job
 salt '*' schedule.disable_job scheduled_job
+
+# List schedules
+salt '*' schedule.list
 ```
+
+
 
 ## Working With SLS
 
 ```
+# Show SLS
 salt '*' state.show_sls
+
+# listing states modules on the minion
+salt-call sys.list_state_modules
 ```
+
+
 
 ## Testing States
 
 ```
+# Test a highstate using the highstate module
 salt '*' state.highstate test=True
+
+# Test a highstate using the sls module
 salt '*' state.sls test=True
+
+# Test a single state
 salt '*' state.single test=True
 ```
+
+
 
 ## Load testing
 
@@ -331,6 +434,8 @@ salt '*' state.single test=True
 # Starting 20 minions
 wget https://raw.githubusercontent.com/saltstack/salt/develop/tests/minionswarm.py; python minionswarm.py -m 20 --master salt-master;
 ```
+
+
 
 ## State Declaration Structure
 
@@ -383,22 +488,37 @@ wget https://raw.githubusercontent.com/saltstack/salt/develop/tests/minionswarm.
       - <Requisite Reference>
 ```
 
-## SaltStack Github Repositories
 
-- *Django* with SaltStack https://github.com/wunki/django-salted
+
+## Salted Github Repositories
+
+- Django with SaltStack https://github.com/wunki/django-salted
 - Salt GUI pad https://github.com/tinyclues/saltpad
-- *Openstack* automation with SaltStack https://github.com/CSSCorp/openstack-automation
+- Openstack automation with SaltStack https://github.com/CSSCorp/openstack-automation
 - A curated collection of working salt *states* and configurations for use in your saltstack setup. https://github.com/saltops/saltmine
-- These are all of the configuration files needed to built a *Wordpress* development environment with *Vagrant*, *Virtual Box* and SaltStack https://github.com/paulehr/saltstack-wordpress
-- *Java* bindings for the SaltStack API https://github.com/SUSE/saltstack-netapi-client-java
-- *Vim* snippets for SaltStack *states* files https://github.com/StephenPCG/vim-snippets-salt
+- These are all of the configuration files needed to built a Wordpress development environment with Vagrant, Virtual Box and SaltStack https://github.com/paulehr/saltstack-wordpress
+- Java bindings for the SaltStack API https://github.com/SUSE/saltstack-netapi-client-java
+- Vim snippets for SaltStack *states* files https://github.com/StephenPCG/vim-snippets-salt
 - Metrics for SaltStack https://github.com/pengyao/salt-metrics
 - Salt GUI https://github.com/saltstack/halite
+- cmdb saltstack https://github.com/voilet/cmdb
+- GUI For SaltStack https://github.com/yueyongyue/saltshaker
+- A collaborative curated list of awesome SaltStack resources, tutorials and other salted stuff. https://github.com/hbokh/awesome-saltstack
+- SaltStack provisioner for test-kitchen https://github.com/saltstack/kitchen-salt
+- Dashboard for saltstack https://github.com/halfss/salt-dashboard
+- Recipe to deploy production Kubernetes cluster https://github.com/valentin2105/Kubernetes-Saltstack
+- A gui and cli to manage saltstack deployments https://github.com/Lothiraldan/saltpad
+- Docker Compose setup to spin up a salt master and minions for easy testing, learning, and prototyping  https://github.com/cyface/docker-saltstack
 
-# Lisence and contribution
-This part is lisenced under CC BY-SA 4.0.
-Share — copy and redistribute the material in any medium or format
-Adapt — remix, transform, and build upon the material for any purpose, even commercially.
-The licensor cannot revoke these freedoms as long as you follow the license terms.
 
-Feel free to contribute.
+
+## Interesting Reads
+
+- [SaltStack for Flexible and Scalable Configuration Management](https://www.infoq.com/articles/saltstack-configuration-management/)
+- [Lyft Replaces Puppet with SaltStack](https://www.infoq.com/news/2014/08/lyft-moves-to-saltstack/)
+- [SaltStack’s “Big” Role in Google Kubernetes and Why Immutable Infrastructure Makes The Cloud a Giant Computer](https://thenewstack.io/saltstacks-big-role-in-google-kubernetes-and-why-immutable-infrastructure-makes-the-cloud-a-giant-computer/)
+- [Every Day Is Monday In Operations](https://engineering.linkedin.com/blog/2016/11/every-day-is-monday-in-operations)
+- [SaltStack as an Alternative to Terraform for AWS Orchestration](https://eng.lyft.com/saltstack-as-an-alternative-to-terraform-for-aws-orchestration-cd2ceb06bf8c)
+- [One week of Salt: frustrations and reflections](https://stevebennett.me/2014/02/17/one-week-of-salt-frustrations-and-reflections/)
+- [Overcoming AWS Complexity with SaltStack patterns](https://eng.lyft.com/overcoming-aws-complexity-with-saltstack-patterns-1472981f43c6)
+
