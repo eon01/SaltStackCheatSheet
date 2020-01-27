@@ -437,7 +437,16 @@ salt '*' state.single test=True
 ## Asynchroneous execution
 
 ```
+# Run the command in the async mode
 salt '*' test.version --async
+
+# List recent jobs
+salt-run jobs.list_jobs
+# or
+salt-run jobs.active
+
+# Get the returned result:
+salt-run jobs.lookup_jid <job_id>
 ```
 
 
