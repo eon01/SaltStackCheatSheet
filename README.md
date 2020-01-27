@@ -434,6 +434,14 @@ salt '*' state.single test=True
 
 
 
+## Asynchroneous execution
+
+```
+salt '*' test.version --async
+```
+
+
+
 ## Load testing
 
 ```
