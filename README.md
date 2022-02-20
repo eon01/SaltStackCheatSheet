@@ -7,10 +7,9 @@ This cheat sheet was first published in "[SaltStack For DevOps](http://saltstack
 ![](images/sfd.png)
 
 
+## Installing SaltStack - Ubuntu 12, 14, 16, 18 and 20
 
-## Installing SaltStack - Ubuntu 12, 14, 16 and 18
-
-Update your key base and sources lists from [this page](https://repo.saltstack.com/#ubuntu) according to your distribution.
+Update your key base and source lists from [this page](https://repo.saltstack.com/#ubuntu) according to your distribution.
 
 Example: Ubuntu 18 - Python3
 
@@ -37,9 +36,7 @@ apt-get install salt-syndic
 apt-get install salt-api
 ```
 
-
-
-## Multi Platform Installation
+## Multi-Platform Installation
 
 Salt Master:
 
@@ -55,11 +52,9 @@ curl -L https://bootstrap.saltstack.com -o install_salt.sh
 sudo sh install_salt.sh -P
 ```
 
-
-
 ## Salt Key Management
 
-``` 
+```
 # Listing Salt requests
 salt-key -L
 
@@ -76,8 +71,6 @@ salt-key -d minion_id
 salt-key -d 'minion' && yes | salt-key -a 'minion'
 ```
 
-
-
 ## Debugging
 
 ```
@@ -93,8 +86,6 @@ rm -rf /var/cache/salt
 start master/minion
 ```
 
-
-
 ## Clearing Cache
 
 ```
@@ -108,8 +99,6 @@ salt '*' saltutil.clear_cache
 salt '*' saltutil.sync_all
 ```
 
-
-
 ## SaltStack Documentation
 
 ```
@@ -122,7 +111,7 @@ salt '*' sys.doc module_name
 #Examples:
 salt '*' sys.doc status
 salt '*' sys.doc pkg     
-salt '*' sys.doc network 
+salt '*' sys.doc network
 salt '*' sys.doc system
 salt '*' sys.doc cloud
 
@@ -133,8 +122,6 @@ salt '*' sys.doc module_name function_name
 salt '*' sys.doc  auth django
 salt '*' sys.doc sdb sqlite3
 ```
-
-
 
 ## SaltStack Versions
 
@@ -150,10 +137,6 @@ salt-master --version
 salt-minion --version
 ```
 
-
-
-
-
 ## SaltStack Modules And Functions
 
 ```
@@ -167,25 +150,23 @@ salt '*' sys.list_functions
 salt-call saltutil.sync_modules
 ```
 
-
-
 ## Compound Matchers
 
-| Letter | Match Type | Example | Alt Delimiter?] |
-| --- | --- | --- | --- |
-| G | Grains glob | G@os:Ubuntu | Yes |
-| E | PCRE Minion ID | E@web\d+\.(dev\|qa\|prod)\.loc | No |
-| P | Grains PCRE | P@os:(RedHat\|Fedora\|CentOS) | Yes |
-| L | List of minions | L@minion1.example.com,minion3.domain.com or bl*.domain.com | No |
-| I | Pillar glob | I@pdata:foobar | Yes |
-| J | Pillar PCRE | J@pdata:^(foo\|bar)$ | Yes |
-| S | Subnet/IP address | S@192.168.1.0/24 or S@192.168.1.100 | No |
-| R | Range cluster | R@%foo.bar | No |
+| Letter | Match Type        | Example                                                    | Alt Delimiter?] |
+| ------ | ----------------- | ---------------------------------------------------------- | --------------- |
+| G      | Grains glob       | G@os:Ubuntu                                                | Yes             |
+| E      | PCRE Minion ID    | E@web\d+\.(dev\|qa\|prod)\.loc                             | No              |
+| P      | Grains PCRE       | P@os:(RedHat\|Fedora\|CentOS)                              | Yes             |
+| L      | List of minions   | L@minion1.example.com,minion3.domain.com or bl*.domain.com | No              |
+| I      | Pillar glob       | I@pdata:foobar                                             | Yes             |
+| J      | Pillar PCRE       | J@pdata:^(foo\|bar)$                                       | Yes             |
+| S      | Subnet/IP address | S@192.168.1.0/24 or S@192.168.1.100                        | No              |
+| R      | Range cluster     | R@%foo.bar                                                 | No              |
 
-Other examples: 
+Other examples:
 
 ```
-# Examples taken from: https://docs.saltstack.com/en/latest/topics/targeting/compound.html
+# Examples are taken from https://docs.saltstack.com/en/latest/topics/targeting/compound.html
 
 # Joining
 salt -C 'webserv* and G@os:Debian or E@web-dc1-srv.*' test.ping
@@ -194,8 +175,6 @@ salt -C '( ms-1 or G@id:ms-3 ) and G@id:ms-3' test.ping
 # Excluding
 salt -C 'not web-dc1-srv' test.ping
 ```
-
-
 
 ## Upgrades & Versions of System Packages
 
@@ -216,9 +195,7 @@ salt '*' pkgutil.refresh_db
 salt '*' pkgutil.version mongodb
 ```
 
-
-
-## Packages Manipulation
+## Packages 
 
 ```
 # Installation
@@ -233,10 +210,7 @@ salt '*' pkg.remove vim
 # Purging package(s)
 salt '*' pkg.purge apache2 mysql-server
 
-
 ```
-
-
 
 ## Reboot & Uptime
 
@@ -247,8 +221,6 @@ salt '*' system.reboot
 #Uptime
 salt '*' status.uptime
 ```
-
-
 
 ## Using Grains
 
@@ -266,19 +238,15 @@ salt '*' grains.items
 salt '*' grains.get path
 ```
 
-
-
 ## Syncing Data
 
 ```
 # Syncing grains
 salt '*' saltutil.sync_grains
 
-# Syncing everything from grains to modules, outputters, renderers, returners, states and utils.
+# Syncing everything from grains to modules, outputters, renderers, returners, states, and utils.
 salt '*' saltutil.sync_all
 ```
-
-
 
 ## Running System Commands
 
@@ -287,8 +255,6 @@ salt "*" cmd.run "ls -lrth /data"
 salt "*" cmd.run "df -kh /data"
 salt "*" cmd.run "du -sh /data"
 ```
-
-
 
 ## Working With Services
 
@@ -304,8 +270,6 @@ salt '*' service.start apache2
 salt '*' service.restart apache2
 salt '*' service.stop apache2
 ```
-
-
 
 ## Network Management
 
@@ -323,7 +287,7 @@ salt '*' network.traceroute localhost
 salt '*' network.get_hostname      
 
 # Modify hostname to 'myNode'
-salt '*' network.mod_hostname myNode 
+salt '*' network.mod_hostname myNode
 
 # Information on all of the running TCP connections
 salt '*' network.active_tcp
@@ -340,22 +304,20 @@ salt '*' network.default_route
 # Execute dig
 salt '*' network.dig eon01.com
 
-# Get the MAC addres of eth0 interface
+# Get the MAC address of eth0 interface
 salt '*' network.hw_addr eth0
 
-# Get the inet addres of eth1 interface
+# Get the inet address of eth1 interface
 salt '*' network.interface eth1
 
-# Get the IP addres of tun interface 
+# Get the IP address of tun interface
 salt '*' network.interface_ip tun
 ```
-
-
 
 ## Working With HTTP Requests
 
 ```
-# Get the html source code of a page
+# Get the HTML source code of a page
 salt-run http.query https://faun.dev text=true
 
 # Get the header of a page
@@ -369,8 +331,6 @@ salt '*' http.query http://domain.com/ method=POST params='key1=val1&key2=val2'
 
 ```
 
-
-
 ## Job Management
 
 ```
@@ -380,14 +340,12 @@ salt-run jobs.active
 # List all jobs with the id and other information
 salt-run jobs.list_jobs
 
-# List multiple information about the job with the id:20151101225221651308 like the result output
+# List multiple information about the job with the id:20151101225221651308 like the resulting output
 salt-run jobs.lookup_jid 20151101225221651308
 
 # Kill the job with the id:20151101225221651308
 salt 'server' saltutil.kill_job 20151101225221651308
 ```
-
-
 
 ## Scheduling Features
 
@@ -405,8 +363,6 @@ salt '*' schedule.disable_job scheduled_job
 salt '*' schedule.list
 ```
 
-
-
 ## Working With SLS
 
 ```
@@ -417,24 +373,20 @@ salt '*' state.show_sls
 salt-call sys.list_state_modules
 ```
 
-
-
 ## Testing States
 
 ```
 # Test a highstate using the highstate module
 salt '*' state.highstate test=True
 
-# Test a highstate using the sls module
+# Test a highstate using the SLS module
 salt '*' state.sls test=True
 
 # Test a single state
 salt '*' state.single test=True
 ```
 
-
-
-## Asynchroneous execution
+## Asynchronous execution
 
 ```
 # Run the command in the async mode
@@ -449,16 +401,12 @@ salt-run jobs.active
 salt-run jobs.lookup_jid <job_id>
 ```
 
-
-
 ## Load testing
 
 ```
 # Starting 20 minions
 wget https://raw.githubusercontent.com/saltstack/salt/develop/tests/minionswarm.py; python minionswarm.py -m 20 --master salt-master;
 ```
-
-
 
 ## State Declaration Structure
 
@@ -511,28 +459,199 @@ wget https://raw.githubusercontent.com/saltstack/salt/develop/tests/minionswarm.
       - <Requisite Reference>
 ```
 
+## Events
 
+
+```bash
+# Listening to Salt events on the master
+salt-run state.event pretty=True
+
+# Sending events from the minion
+salt-call event.send 'my/custom/tag' '{success: True, message: "It works!"'
+
+# run an event locally on the minion
+salt-call event.fire '{"data": "my message"}' 'my/custom/tag'
+
+```
+
+```bash
+# Instruct minions to sends events to the master when a state completes its execution.
+cat << EOF >> /etc/salt/master
+state_events: True
+EOF
+
+# Firing an event after state execution
+cat << EOF > /srv/salt/webserver/init.sls
+apache2:
+  pkg.installed:
+    - fire_event: apache2/installed
+EOF
+```
+
+## Reactor
+
+```bash
+# map a event tag to a reactor
+cat << EOF > /etc/salt/master.d/reactor.conf
+reactor:
+  - 'salt/minion/minion01/start':
+    - /srv/reactor/start.sls
+EOF
+
+# execute a state as a reaction to an event tag
+cat << EOF > /srv/reactor/start.sls
+<id>:
+  local.state.single:
+    - tgt: <target>
+    - tgt_type: <targeting_type>
+    - args:
+      - fun: <module.function>
+      - name: <>
+EOF
+
+# targeting the minion which sent the event
+cat << EOF > /srv/reactor/start.sls
+<id>:
+  local.state.single:
+    - tgt: {{ data['id'] }} 
+    - args:
+      - fun: <module.function>
+      - name: <>
+EOF
+```
+
+## Salt beacons
+
+```bash
+# watching files using beacons
+cat << EOF > /srv/pillar/beacons/init.sls
+beacons:
+  inotify:
+    - files:
+        <file_path>:
+          mask:
+            - modify
+EOF
+
+# using load.averages
+cat << EOF > /srv/pillar/beacons/init.sls
+beacons:
+  load:
+    - averages:
+        1m:
+          - 0.0
+          - 2.0
+        5m:
+          - 0.0
+          - 1.0
+        15m:
+          - 0.0
+          - 1.0
+EOF
+
+# Using memusage
+cat << EOF > /srv/pillar/beacons/init.sls  
+beacons:        
+  memusage:
+    - percent: 50%        
+EOF
+```
+
+## Salt mine
+
+```yaml
+# Using mine functions
+cat << EOF >> /srv/pillar/miner.sls
+mine_functions:
+  network.get_hostname: []
+EOF
+
+cat << EOF >> /srv/pillar/miner.sls
+mine_functions:
+  network.ip_addrs: [eth1]
+EOF
+
+# refresh pillars if you configure mine as a pillar
+salt '*' saltutil.refresh_pillar
+
+# updating mine
+salt '*' mine.update
+# get mine data
+salt '*' mine.get '*' network.get_hostname
+
+# Using alias
+cat << EOF > /srv/pillar/mine.sls
+mine_functions:
+  get_hostname:
+    mine_function: network.get_hostname
+  get_eth1:
+    mine_function: network.ip_addrs
+    interface: eth1
+EOF
+```  
+
+
+## Orchestration
+
+```bash
+salt-run state.orchestrate orch.<SLS>
+salt-run state.orchestrate orch.<SLS> test=<true|false>
+salt-run state.orchestrate orch.<SLS> saltenv=<env>
+```
+
+
+```yaml
+# Orchestration without highstate:
+<id>:
+  salt.state:
+    - tgt: <target>
+    - sls: <sls>
+
+# Orchestration with highstate:
+<id>:
+  salt.state:
+    - tgt: <target>
+    - sls: <sls>
+    - highstate: True
+
+# Orchestration with highstate and SLS requirements:
+<id>:
+  salt.state:
+    - tgt: <target>
+    - sls: <sls>
+    - highstate: True
+    - require:
+      - salt: <>    
+```
 
 ## Salted Github Repositories
 
-- [Django with SaltStack](https://github.com/wunki/django-salted) 
-- [Salt GUI pad](https://github.com/tinyclues/saltpad) 
-- [Openstack automation with SaltStack](https://github.com/CSSCorp/openstack-automation) 
+- [Django with SaltStack](https://github.com/wunki/django-salted)
+- [Salt GUI pad](https://github.com/tinyclues/saltpad)
+- [Openstack automation with SaltStack](https://github.com/CSSCorp/openstack-automation)
 - [A curated collection of working salt *states* and configurations for use in your SaltStack setup.]( https://github.com/saltops/saltmine)
-- [These are all of the configuration files needed to built a Wordpress development environment with Vagrant, Virtual Box and SaltStack](https://github.com/paulehr/saltstack-wordpress) 
+- [These are all of the configuration files needed to built a Wordpress development environment with Vagrant, Virtual Box and SaltStack](https://github.com/paulehr/saltstack-wordpress)
 - [Java bindings for the SaltStack API]( https://github.com/SUSE/saltstack-netapi-client-java)
 - [Vim snippets for SaltStack *states* files]( https://github.com/StephenPCG/vim-snippets-salt)
-- [Metrics for SaltStack](https://github.com/pengyao/salt-metrics) 
-- [Salt GUI](https://github.com/saltstack/halite) 
-- [cmdb saltstack](https://github.com/voilet/cmdb) 
-- [GUI For SaltStack](https://github.com/yueyongyue/saltshaker) 
-- [A collaborative curated list of awesome SaltStack resources, tutorials and other salted stuff.](https://github.com/hbokh/awesome-saltstack) 
-- [SaltStack provisioner for test-kitchen](https://github.com/saltstack/kitchen-salt) 
-- [Dashboard for saltstack](https://github.com/halfss/salt-dashboard) 
-- [Recipe to deploy production Kubernetes cluster](https://github.com/valentin2105/Kubernetes-Saltstack) 
-- [A gui and cli to manage saltstack deployments](https://github.com/Lothiraldan/saltpad) 
+- [Metrics for SaltStack](https://github.com/pengyao/salt-metrics)
+- [Salt GUI](https://github.com/saltstack/halite)
+- [cmdb saltstack](https://github.com/voilet/cmdb)
+- [GUI For SaltStack](https://github.com/yueyongyue/saltshaker)
+- [A collaborative curated list of awesome SaltStack resources, tutorials and other salted stuff.](https://github.com/hbokh/awesome-saltstack)
+- [SaltStack provisioner for test-kitchen](https://github.com/saltstack/kitchen-salt)
+- [Dashboard for saltstack](https://github.com/halfss/salt-dashboard)
+- [Recipe to deploy production Kubernetes cluster](https://github.com/valentin2105/Kubernetes-Saltstack)
+- [A gui and cli to manage saltstack deployments](https://github.com/Lothiraldan/saltpad)
 - [Docker Compose setup to spin up a salt master and minions for easy testing, learning, and prototyping](https://github.com/cyface/docker-saltstack)  
-
+- [Testinfra test your infrastructures](https://github.com/pytest-dev/pytest-testinfra)
+- [Jenkins Salt API Plugin](https://plugins.jenkins.io/saltstack/)
+- [ISalt - IPython-based command shell for interactive Salt programming.](https://github.com/mirceaulinic/isalt)
+- [Alcali - A web based tool for monitoring and administrating Saltstack Salt.](https://alcali.dev/)
+- [salt-lint - Checks Salt state files (SLS) for practices and behavior that could potentially be improved.](https://github.com/warpnet/salt-lint/)
+- [salt-sproxy - Salt plugin to automate the management and configuration of devices and applications, without running (Proxy) Minions.](https://github.com/mirceaulinic/salt-sproxy)
+- [salt-pepper - A CLI Frontend to the salt-api systems.](https://pypi.org/project/salt-pepper/)
+- [Molten - Molten is a WebUI for the REST API exposed by Saltstack.](https://github.com/martinhoefling/molten)
+- [Silica - A Flask-based lightweight Salt web console.](https://gitlab.com/perfecto25/silica)
 
 
 ## Interesting Reads
@@ -544,4 +663,6 @@ wget https://raw.githubusercontent.com/saltstack/salt/develop/tests/minionswarm.
 - [SaltStack as an Alternative to Terraform for AWS Orchestration](https://eng.lyft.com/saltstack-as-an-alternative-to-terraform-for-aws-orchestration-cd2ceb06bf8c)
 - [One week of Salt: frustrations and reflections](https://stevebennett.me/2014/02/17/one-week-of-salt-frustrations-and-reflections/)
 - [Overcoming AWS Complexity with SaltStack patterns](https://eng.lyft.com/overcoming-aws-complexity-with-saltstack-patterns-1472981f43c6)
-
+- [How To Use Salt Cloud Map Files to Deploy App Servers and an Nginx Reverse Proxy](https://www.digitalocean.com/community/tutorials/how-to-use-salt-cloud-map-files-to-deploy-app-servers-and-an-nginx-reverse-proxy)
+- [SaltStack Infrastructure: Creating Salt States for HAProxy Load Balancers](https://www.digitalocean.com/community/tutorials/saltstack-infrastructure-creating-salt-states-for-haproxy-load-balancers)
+- [Salt-API, A Crash Course](https://thereluctanttecchie.blogspot.com/2014/01/salt-api-crash-course.html)
